@@ -15,7 +15,8 @@ public interface BulletinInfoMapper extends BaseMapper<BulletinInfo> {
 
     /**
      * 分页获取公告信息
-     * @param page 分页对象
+     *
+     * @param page         分页对象
      * @param bulletinInfo 公告信息
      * @return 结果
      */

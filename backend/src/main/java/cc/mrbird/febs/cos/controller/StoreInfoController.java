@@ -30,7 +30,7 @@ public class StoreInfoController {
      */
     @GetMapping("/page")
     public R page(Page<StoreInfo> page, StoreInfo storeInfo) {
-        return R.ok();
+        return R.ok(storeInfoService.selectStorePage(page, storeInfo));
     }
 
     /**

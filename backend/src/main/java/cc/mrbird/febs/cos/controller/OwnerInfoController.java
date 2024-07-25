@@ -30,7 +30,7 @@ public class OwnerInfoController {
      */
     @GetMapping("/page")
     public R page(Page<OwnerInfo> page, OwnerInfo ownerInfo) {
-        return R.ok();
+        return R.ok(ownerInfoService.selectOwnerPage(page, ownerInfo));
     }
 
     /**

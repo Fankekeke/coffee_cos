@@ -30,7 +30,7 @@ public class StoreQueueInfoController {
      */
     @GetMapping("/page")
     public R page(Page<StoreQueueInfo> page, StoreQueueInfo storeQueueInfo) {
-        return R.ok();
+        return R.ok(storeQueueInfoService.selectStoreQueuePage(page, storeQueueInfo));
     }
 
     /**

@@ -30,7 +30,7 @@ public class ExchangeRecordInfoController {
      */
     @GetMapping("/page")
     public R page(Page<ExchangeRecordInfo> page, ExchangeRecordInfo exchangeRecordInfo) {
-        return R.ok();
+        return R.ok(exchangeRecordInfoService.selectExchangeRecordPage(page, exchangeRecordInfo));
     }
 
     /**

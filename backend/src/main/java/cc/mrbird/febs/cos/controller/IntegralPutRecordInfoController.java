@@ -30,7 +30,7 @@ public class IntegralPutRecordInfoController {
      */
     @GetMapping("/page")
     public R page(Page<IntegralPutRecordInfo> page, IntegralPutRecordInfo integralPutRecordInfo) {
-        return R.ok();
+        return R.ok(integralPutRecordInfoService.selectIntegralPutRecordPage(page, integralPutRecordInfo));
     }
 
     /**

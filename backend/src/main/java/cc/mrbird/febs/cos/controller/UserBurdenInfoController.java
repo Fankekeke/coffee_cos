@@ -30,7 +30,7 @@ public class UserBurdenInfoController {
      */
     @GetMapping("/page")
     public R page(Page<UserBurdenInfo> page, UserBurdenInfo userBurdenInfo) {
-        return R.ok();
+        return R.ok(userBurdenInfoService.selectUserBurdenPage(page, userBurdenInfo));
     }
 
     /**

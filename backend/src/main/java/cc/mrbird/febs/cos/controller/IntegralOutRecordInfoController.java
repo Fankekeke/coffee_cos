@@ -30,7 +30,7 @@ public class IntegralOutRecordInfoController {
      */
     @GetMapping("/page")
     public R page(Page<IntegralOutRecordInfo> page, IntegralOutRecordInfo integralOutRecordInfo) {
-        return R.ok();
+        return R.ok(integralOutRecordInfoService.selectIntegralOutRecordPage(page, integralOutRecordInfo));
     }
 
     /**

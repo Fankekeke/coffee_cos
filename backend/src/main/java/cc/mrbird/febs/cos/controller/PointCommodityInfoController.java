@@ -30,7 +30,7 @@ public class PointCommodityInfoController {
      */
     @GetMapping("/page")
     public R page(Page<PointCommodityInfo> page, PointCommodityInfo pointCommodityInfo) {
-        return R.ok();
+        return R.ok(pointCommodityInfoService.selectPointCommodity(page, pointCommodityInfo));
     }
 
     /**

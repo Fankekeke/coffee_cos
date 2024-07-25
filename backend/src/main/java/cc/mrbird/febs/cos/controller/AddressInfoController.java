@@ -33,7 +33,7 @@ public class AddressInfoController {
      */
     @GetMapping("/page")
     public R page(Page<AddressInfo> page, AddressInfo addressInfo) {
-        return R.ok();
+        return R.ok(addressInfoService.selectAddressPage(page, addressInfo));
     }
 
     /**

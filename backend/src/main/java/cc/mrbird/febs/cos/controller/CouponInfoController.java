@@ -30,7 +30,7 @@ public class CouponInfoController {
      */
     @GetMapping("/page")
     public R page(Page<CouponInfo> page, CouponInfo couponInfo) {
-        return R.ok();
+        return R.ok(couponInfoService.selectCouponPage(page, couponInfo));
     }
 
     /**
