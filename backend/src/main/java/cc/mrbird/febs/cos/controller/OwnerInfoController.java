@@ -4,6 +4,7 @@ package cc.mrbird.febs.cos.controller;
 import cc.mrbird.febs.common.utils.R;
 import cc.mrbird.febs.cos.entity.OwnerInfo;
 import cc.mrbird.febs.cos.service.IOwnerInfoService;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,7 @@ public class OwnerInfoController {
      */
     @GetMapping("/list")
     public R list() {
-        return R.ok(ownerInfoService.list());
+        return R.ok(ownerInfoService.list(Wrappers.<OwnerInfo>lambdaQuery().eq(OwnerInfo::getDelFlag, "0")));
     }
 
     /**

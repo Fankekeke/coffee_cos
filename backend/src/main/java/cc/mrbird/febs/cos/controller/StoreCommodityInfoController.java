@@ -4,6 +4,7 @@ package cc.mrbird.febs.cos.controller;
 import cc.mrbird.febs.common.utils.R;
 import cc.mrbird.febs.cos.entity.StoreCommodityInfo;
 import cc.mrbird.febs.cos.service.IStoreCommodityInfoService;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,7 @@ public class StoreCommodityInfoController {
      */
     @GetMapping("/list")
     public R list() {
-        return R.ok(storeCommodityInfoService.list());
+        return R.ok(storeCommodityInfoService.list(Wrappers.<StoreCommodityInfo>lambdaQuery().eq(StoreCommodityInfo::getDelFlag, "0")));
     }
 
     /**

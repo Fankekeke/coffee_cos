@@ -6,6 +6,7 @@ import cc.mrbird.febs.cos.entity.AddressInfo;
 import cc.mrbird.febs.cos.service.IAddressInfoService;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class AddressInfoController {
      */
     @GetMapping("/list")
     public R list() {
-        return R.ok(addressInfoService.list());
+        return R.ok(addressInfoService.list(Wrappers.<AddressInfo>lambdaQuery().eq(AddressInfo::getDelFlag, "0")));
     }
 
     /**

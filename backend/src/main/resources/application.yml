@@ -71,6 +71,13 @@ mybatis-plus:
   global-config:
     # 关闭 mybatis-plus的 banner
     banner: false
+    db-config:
+      #全局配置逻辑删除字段名
+      logic-delete-field: delFlag
+      # 逻辑已删除值(默认为 1)
+      logic-delete-value: 1
+      # 逻辑未删除值(默认为 0)
+      logic-not-delete-value: 0
 
 management:
   endpoints:

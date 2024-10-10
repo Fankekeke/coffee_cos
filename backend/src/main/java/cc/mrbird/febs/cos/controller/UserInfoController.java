@@ -4,6 +4,7 @@ package cc.mrbird.febs.cos.controller;
 import cc.mrbird.febs.common.utils.R;
 import cc.mrbird.febs.cos.entity.UserInfo;
 import cc.mrbird.febs.cos.service.IUserInfoService;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,7 @@ public class UserInfoController {
      */
     @GetMapping("/list")
     public R list() {
-        return R.ok(userInfoService.list());
+        return R.ok(userInfoService.list(Wrappers.<UserInfo>lambdaQuery().eq(UserInfo::getDelFlag, "0")));
     }
 
     /**
