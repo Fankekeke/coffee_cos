@@ -4,12 +4,14 @@ package cc.mrbird.febs.cos.controller;
 import cc.mrbird.febs.common.utils.R;
 import cc.mrbird.febs.cos.entity.CommodityInfo;
 import cc.mrbird.febs.cos.service.ICommodityInfoService;
+import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -63,6 +65,10 @@ public class CommodityInfoController {
      */
     @PostMapping
     public R save(CommodityInfo commodityInfo) {
+        // 商品编号
+        commodityInfo.setCode("COM-" + System.currentTimeMillis());
+        // 添加时间
+        commodityInfo.setCreateDate(DateUtil.formatDateTime(new Date()));
         return R.ok(commodityInfoService.save(commodityInfo));
     }
 

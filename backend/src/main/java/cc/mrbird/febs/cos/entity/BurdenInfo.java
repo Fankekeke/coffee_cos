@@ -3,8 +3,10 @@ package cc.mrbird.febs.cos.entity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.List;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
@@ -64,4 +66,10 @@ public class BurdenInfo implements Serializable {
      */
     @TableLogic
     private String delFlag;
+
+    /**
+     * 子集
+     */
+    @TableField(exist = false)
+    private List<BurdenInfo> children;
 }

@@ -4,12 +4,14 @@ package cc.mrbird.febs.cos.controller;
 import cc.mrbird.febs.common.utils.R;
 import cc.mrbird.febs.cos.entity.CouponInfo;
 import cc.mrbird.febs.cos.service.ICouponInfoService;
+import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -63,6 +65,10 @@ public class CouponInfoController {
      */
     @PostMapping
     public R save(CouponInfo couponInfo) {
+        // 优惠券编号
+        couponInfo.setCode("COUP-" + System.currentTimeMillis());
+        // 添加时间
+        couponInfo.setCreateDate(DateUtil.formatDateTime(new Date()));
         return R.ok(couponInfoService.save(couponInfo));
     }
 

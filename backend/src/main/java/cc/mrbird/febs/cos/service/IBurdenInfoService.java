@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * @author FanK
@@ -21,4 +22,11 @@ public interface IBurdenInfoService extends IService<BurdenInfo> {
      * @return 结果
      */
     IPage<LinkedHashMap<String, Object>> selectBurdenPage(Page<BurdenInfo> page, BurdenInfo burdenInfo);
+
+    /**
+     * 获取配料信息树
+     *
+     * @return 结果
+     */
+    List<BurdenInfo> queryTreeList();
 }

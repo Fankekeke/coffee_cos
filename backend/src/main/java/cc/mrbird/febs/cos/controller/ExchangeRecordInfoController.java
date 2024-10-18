@@ -42,7 +42,7 @@ public class ExchangeRecordInfoController {
      */
     @GetMapping("/{id}")
     public R detail(@PathVariable("id") Integer id) {
-        return R.ok(exchangeRecordInfoService.getById(id));
+        return R.ok(exchangeRecordInfoService.queryDetail(id));
     }
 
     /**

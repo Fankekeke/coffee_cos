@@ -35,6 +35,16 @@ public class BurdenInfoController {
     }
 
     /**
+     * 获取配料信息树
+     *
+     * @return 结果
+     */
+    @GetMapping("/queryTreeList")
+    public R queryTreeList() {
+        return R.ok(burdenInfoService.queryTreeList());
+    }
+
+    /**
      * 查询配料信息详情
      *
      * @param id 主键ID

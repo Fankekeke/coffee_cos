@@ -21,4 +21,12 @@ public interface IExchangeRecordInfoService extends IService<ExchangeRecordInfo>
      * @return 结果
      */
     IPage<LinkedHashMap<String, Object>> selectExchangeRecordPage(Page<ExchangeRecordInfo> page, ExchangeRecordInfo exchangeRecordInfo);
+
+    /**
+     * 查询积分物品兑换记录信息详情
+     *
+     * @param id 主键ID
+     * @return 结果
+     */
+    LinkedHashMap<String, Object> queryDetail(Integer id);
 }

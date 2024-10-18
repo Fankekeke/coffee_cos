@@ -3,7 +3,9 @@ package cc.mrbird.febs.cos.controller;
 
 import cc.mrbird.febs.common.utils.R;
 import cc.mrbird.febs.cos.entity.AddressInfo;
+import cc.mrbird.febs.cos.entity.UserInfo;
 import cc.mrbird.febs.cos.service.IAddressInfoService;
+import cc.mrbird.febs.cos.service.IUserInfoService;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -24,6 +26,8 @@ import java.util.List;
 public class AddressInfoController {
 
     private final IAddressInfoService addressInfoService;
+
+    private final IUserInfoService userInfoService;
 
     /**
      * 分页获取用户收货地址信息
@@ -55,7 +59,7 @@ public class AddressInfoController {
      */
     @GetMapping("/list")
     public R list() {
-        return R.ok(addressInfoService.list(Wrappers.<AddressInfo>lambdaQuery().eq(AddressInfo::getDelFlag, "0")));
+        return R.ok(addressInfoService.list());
     }
 
     /**
@@ -66,6 +70,19 @@ public class AddressInfoController {
      */
     @PostMapping
     public R save(AddressInfo addressInfo) {
+        // 地址编号
+        addressInfo.setCode("ARS-" + System.currentTimeMillis());
+        // 创建时间
+        addressInfo.setCreateDate(DateUtil.formatDateTime(new Date()));
+        // 获取用户信息
+        UserInfo user = userInfoService.getOne(Wrappers.<UserInfo>lambdaQuery().eq(UserInfo::getUserId, addressInfo.getUserId()));
+        if (user != null) {
+            addressInfo.setUserId(user.getId());
+        }
+        // 默认地址处理
+        if ("1".equals(addressInfo.getDefaultFlag())) {
+            addressInfoService.update(Wrappers.<AddressInfo>lambdaUpdate().set(AddressInfo::getDefaultFlag, "0").eq(AddressInfo::getUserId, addressInfo.getUserId()));
+        }
         return R.ok(addressInfoService.save(addressInfo));
     }
 
@@ -76,7 +93,10 @@ public class AddressInfoController {
      * @return 结果
      */
     @PutMapping
-    public R edit(AddressInfo addressInfo) {
+    public R edit(AddressInfo addressInfo) {// 默认地址处理
+        if ("1".equals(addressInfo.getDefaultFlag())) {
+            addressInfoService.update(Wrappers.<AddressInfo>lambdaUpdate().set(AddressInfo::getDefaultFlag, "0").eq(AddressInfo::getUserId, addressInfo.getUserId()));
+        }
         return R.ok(addressInfoService.updateById(addressInfo));
     }
 
