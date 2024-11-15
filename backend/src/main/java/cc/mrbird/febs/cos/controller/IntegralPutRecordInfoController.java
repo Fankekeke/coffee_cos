@@ -63,7 +63,7 @@ public class IntegralPutRecordInfoController {
      */
     @PostMapping
     public R save(IntegralPutRecordInfo integralPutRecordInfo) {
-        return R.ok(integralPutRecordInfoService.save(integralPutRecordInfo));
+        return R.ok(integralPutRecordInfoService.integralPutRecordAdd(integralPutRecordInfo));
     }
 
     /**

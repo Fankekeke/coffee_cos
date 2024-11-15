@@ -4,6 +4,7 @@ package cc.mrbird.febs.cos.controller;
 import cc.mrbird.febs.common.utils.R;
 import cc.mrbird.febs.cos.entity.IntegralOutRecordInfo;
 import cc.mrbird.febs.cos.service.IIntegralOutRecordInfoService;
+import cc.mrbird.febs.cos.service.IUserInfoService;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
@@ -63,7 +64,7 @@ public class IntegralOutRecordInfoController {
      */
     @PostMapping
     public R save(IntegralOutRecordInfo integralOutRecordInfo) {
-        return R.ok(integralOutRecordInfoService.save(integralOutRecordInfo));
+        return R.ok(integralOutRecordInfoService.integralOutRecordAdd(integralOutRecordInfo));
     }
 
     /**

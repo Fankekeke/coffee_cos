@@ -21,4 +21,12 @@ public interface IIntegralOutRecordInfoService extends IService<IntegralOutRecor
      * @return 结果
      */
     IPage<LinkedHashMap<String, Object>> selectIntegralOutRecordPage(Page<IntegralOutRecordInfo> page, IntegralOutRecordInfo integralOutRecordInfo);
+
+    /**
+     * 添加积分消费记录
+     *
+     * @param integralOutRecordInfo 积分消费记录
+     * @return 结果
+     */
+    boolean integralOutRecordAdd(IntegralOutRecordInfo integralOutRecordInfo);
 }

@@ -3,13 +3,17 @@ package cc.mrbird.febs.cos.controller;
 
 import cc.mrbird.febs.common.utils.R;
 import cc.mrbird.febs.cos.entity.ExchangeRecordInfo;
+import cc.mrbird.febs.cos.entity.UserInfo;
 import cc.mrbird.febs.cos.service.IExchangeRecordInfoService;
+import cc.mrbird.febs.cos.service.IUserInfoService;
+import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +25,8 @@ import java.util.List;
 public class ExchangeRecordInfoController {
 
     private final IExchangeRecordInfoService exchangeRecordInfoService;
+
+    private final IUserInfoService userInfoService;
 
     /**
      * 分页获取积分物品兑换记录信息
@@ -63,7 +69,17 @@ public class ExchangeRecordInfoController {
      */
     @PostMapping
     public R save(ExchangeRecordInfo exchangeRecordInfo) {
+        // 兑换编号
+        exchangeRecordInfo.setCode("ECR-" + System.currentTimeMillis());
+        // 兑换时间
+        exchangeRecordInfo.setCreateDate(DateUtil.formatDateTime(new Date()));
+        // 获取用户信息
+        UserInfo user = userInfoService.getOne(Wrappers.<UserInfo>lambdaQuery().eq(UserInfo::getUserId, exchangeRecordInfo.getUserId()));
+        if (user != null) {
+            exchangeRecordInfo.setUserId(user.getId());
+        }
         return R.ok(exchangeRecordInfoService.save(exchangeRecordInfo));
+
     }
 
     /**

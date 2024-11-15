@@ -21,4 +21,12 @@ public interface IIntegralPutRecordInfoService extends IService<IntegralPutRecor
      * @return 结果
      */
     IPage<LinkedHashMap<String, Object>> selectIntegralPutRecordPage(Page<IntegralPutRecordInfo> page, IntegralPutRecordInfo integralPutRecordInfo);
+
+    /**
+     * 添加积分获取记录
+     *
+     * @param integralPutRecordInfo 积分获取记录
+     * @return 结果
+     */
+    boolean integralPutRecordAdd(IntegralPutRecordInfo integralPutRecordInfo);
 }
