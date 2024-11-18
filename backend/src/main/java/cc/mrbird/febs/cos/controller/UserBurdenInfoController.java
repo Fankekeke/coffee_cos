@@ -37,6 +37,17 @@ public class UserBurdenInfoController {
     }
 
     /**
+     * 根据用户ID获取未使用的优惠券信息
+     *
+     * @param userId 用户ID
+     * @return 结果
+     */
+    @GetMapping("/queryNotUseBurdenByUser")
+    public R queryNotUseBurdenByUser(@RequestParam("userId") Integer userId) {
+        return R.ok(userBurdenInfoService.queryNotUseBurdenByUser(userId));
+    }
+
+    /**
      * 查询用户优惠券信息详情
      *
      * @param id 主键ID

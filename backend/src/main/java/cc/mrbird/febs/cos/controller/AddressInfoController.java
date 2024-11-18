@@ -42,6 +42,17 @@ public class AddressInfoController {
     }
 
     /**
+     * 根据用户ID获取收货地址
+     *
+     * @param userId 用户ID
+     * @return 结果
+     */
+    @GetMapping("/queryAddressByUser")
+    public R queryAddressByUser(@RequestParam("userId") Integer userId) {
+        return R.ok(addressInfoService.queryAddressByUser(userId));
+    }
+
+    /**
      * 查询用户收货地址信息详情
      *
      * @param id 主键ID

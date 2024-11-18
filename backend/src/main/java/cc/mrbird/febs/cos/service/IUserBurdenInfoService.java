@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * @author FanK
@@ -21,4 +22,12 @@ public interface IUserBurdenInfoService extends IService<UserBurdenInfo> {
      * @return 结果
      */
     IPage<LinkedHashMap<String, Object>> selectUserBurdenPage(Page<UserBurdenInfo> page, UserBurdenInfo userBurdenInfo);
+
+    /**
+     * 根据用户ID获取未使用的优惠券信息
+     *
+     * @param userId 用户ID
+     * @return 结果
+     */
+    List<UserBurdenInfo> queryNotUseBurdenByUser(Integer userId);
 }
