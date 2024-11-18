@@ -80,6 +80,11 @@ public class OwnerInfo implements Serializable {
     private String createDate;
 
     /**
+     * 所属用户
+     */
+    private Integer userId;
+
+    /**
      * 删除标识
      */
     @TableLogic

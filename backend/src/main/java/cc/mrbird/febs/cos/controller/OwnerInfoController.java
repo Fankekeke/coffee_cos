@@ -1,9 +1,12 @@
 package cc.mrbird.febs.cos.controller;
 
 
+import cc.mrbird.febs.common.exception.FebsException;
 import cc.mrbird.febs.common.utils.R;
 import cc.mrbird.febs.cos.entity.OwnerInfo;
+import cc.mrbird.febs.cos.entity.StoreInfo;
 import cc.mrbird.febs.cos.service.IOwnerInfoService;
+import cc.mrbird.febs.cos.service.IStoreInfoService;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -24,6 +27,8 @@ public class OwnerInfoController {
 
     private final IOwnerInfoService ownerInfoService;
 
+    private final IStoreInfoService storeInfoService;
+
     /**
      * 分页获取店主信息
      *
@@ -34,6 +39,22 @@ public class OwnerInfoController {
     @GetMapping("/page")
     public R page(Page<OwnerInfo> page, OwnerInfo ownerInfo) {
         return R.ok(ownerInfoService.selectOwnerPage(page, ownerInfo));
+    }
+
+    /**
+     * 根据店主获取商铺信息
+     *
+     * @param userId 用户ID
+     * @return 结果
+     */
+    @GetMapping("/queryStoreByOwner")
+    public R queryStoreByOwner(@RequestParam("userId") Integer userId) throws FebsException {
+        // 获取店主信息
+        OwnerInfo ownerInfo = ownerInfoService.getOne(Wrappers.<OwnerInfo>lambdaQuery().eq(OwnerInfo::getUserId, userId));
+        if (ownerInfo == null) {
+            throw new FebsException("未获取到店主信息");
+        }
+        return R.ok(storeInfoService.list(Wrappers.<StoreInfo>lambdaQuery().eq(StoreInfo::getShopkeeperId, ownerInfo.getId())));
     }
 
     /**

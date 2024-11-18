@@ -3,7 +3,9 @@ package cc.mrbird.febs.cos.controller;
 
 import cc.mrbird.febs.common.utils.R;
 import cc.mrbird.febs.cos.entity.UserBurdenInfo;
+import cc.mrbird.febs.cos.service.ICouponInfoService;
 import cc.mrbird.febs.cos.service.IUserBurdenInfoService;
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -11,8 +13,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author FanK
@@ -23,6 +27,8 @@ import java.util.List;
 public class UserBurdenInfoController {
 
     private final IUserBurdenInfoService userBurdenInfoService;
+
+    private final ICouponInfoService couponInfoService;
 
     /**
      * 分页获取用户优惠券信息
@@ -44,7 +50,13 @@ public class UserBurdenInfoController {
      */
     @GetMapping("/queryNotUseBurdenByUser")
     public R queryNotUseBurdenByUser(@RequestParam("userId") Integer userId) {
-        return R.ok(userBurdenInfoService.queryNotUseBurdenByUser(userId));
+        List<UserBurdenInfo> userBurdenInfoList = userBurdenInfoService.queryNotUseBurdenByUser(userId);
+        if (CollectionUtil.isEmpty(userBurdenInfoList)) {
+            return R.ok(Collections.emptyList());
+        }
+        // 获取优惠券ID
+        List<Integer> couponIds = userBurdenInfoList.stream().map(UserBurdenInfo::getCouponId).distinct().collect(Collectors.toList());
+        return R.ok(couponInfoService.listByIds(couponIds));
     }
 
     /**

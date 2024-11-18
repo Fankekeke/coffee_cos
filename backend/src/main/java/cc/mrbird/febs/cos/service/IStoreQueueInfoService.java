@@ -21,4 +21,12 @@ public interface IStoreQueueInfoService extends IService<StoreQueueInfo> {
      * @return 结果
      */
     IPage<LinkedHashMap<String, Object>> selectStoreQueuePage(Page<StoreQueueInfo> page, StoreQueueInfo storeQueueInfo);
+
+    /**
+     * 新增用户排号信息
+     *
+     * @param storeQueueInfo 用户排号信息
+     * @return 结果
+     */
+    boolean queueAdd(StoreQueueInfo storeQueueInfo);
 }

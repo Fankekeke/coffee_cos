@@ -65,10 +65,6 @@ public class StoreQueueInfoController {
      */
     @PostMapping
     public R save(StoreQueueInfo storeQueueInfo) {
-        // 排队编号
-        storeQueueInfo.setCode("SQ-" + System.currentTimeMillis());
-        // 领号时间
-        storeQueueInfo.setReceiveDate(DateUtil.formatDateTime(new Date()));
         return R.ok(storeQueueInfoService.save(storeQueueInfo));
     }
 
