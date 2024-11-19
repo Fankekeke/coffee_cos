@@ -60,6 +60,7 @@ public class StoreQueueInfoServiceImpl extends ServiceImpl<StoreQueueInfoMapper,
         storeQueueInfo.setReceiveDate(DateUtil.formatDateTime(new Date()));
 
         // 判断此商铺当前排号位置
+
         return false;
     }
 }

@@ -47,6 +47,8 @@ public class StoreInfoController {
         return R.ok(storeInfoService.getById(id));
     }
 
+
+
     /**
      * 查询门店信息列表
      *

@@ -6,4 +6,9 @@
     <select id="selectStoreQueuePage" resultType="java.util.LinkedHashMap">
 
     </select>
+
+    <!-- 获取门店当前排号 -->
+    <select id="queryQueueByStore" resultType="java.lang.Integer">
+
+    </select>
 </mapper>

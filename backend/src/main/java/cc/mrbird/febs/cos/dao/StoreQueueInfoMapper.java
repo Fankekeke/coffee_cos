@@ -21,4 +21,12 @@ public interface StoreQueueInfoMapper extends BaseMapper<StoreQueueInfo> {
      * @return 结果
      */
     IPage<LinkedHashMap<String, Object>> selectStoreQueuePage(Page<StoreQueueInfo> page, @Param("storeQueueInfo") StoreQueueInfo storeQueueInfo);
+
+    /**
+     * 获取门店当前排号
+     *
+     * @param storeId 门店ID
+     * @return 结果
+     */
+    Integer queryQueueByStore(@Param("storeId") Integer storeId);
 }
